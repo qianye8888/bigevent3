@@ -25,7 +25,7 @@ $(function () {
     })
 
     // 注册功能
-    $('#form_reg').on('sumbit', function (e) {
+    $('#form-reg').on('submit', function (e) {
         e.preventDefault()
 
         $.ajax({
