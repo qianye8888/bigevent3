@@ -25,22 +25,51 @@ $(function () {
     })
 
     // 注册功能
+    var layer = layui.layer
     $('#form-reg').on('submit', function (e) {
         e.preventDefault()
 
         $.ajax({
             method: 'POST',
-            url: 'http://ajax.frontend.itheima.net/api/reguser',
+            url: '/api/reguser',
             data: {
                 username: $('.reg-box [name=username]').val(),
                 password: $('.reg-box [name=password]').val()
             },
             success: function (res) {
                 if (res.status !== 0) {
-                    return alert(res.message)
+                    // return alert(res.message)
+                    return layer.msg(res.message)
                 }
-                alert(res.message)
+                // alert(res.message)
+                layer.msg("恭喜您，注册成功！")
+
+                $('#link_login').click()
+                $('#form-reg')[0].reset()
             }
         })
     })
+
+    // 登录功能
+    $('#form-login').submit (function (e) {
+        e.preventDefault()
+
+        $.ajax({
+            method: "POST",
+            url: '/api/login',
+            data: $(this).serialize(),
+            success: function (res) {
+                if (res.status !== 0) {
+                    layer.msg(res.message)
+                }
+                layer.msg("恭喜您，登录成功！")
+
+                localStorage.setItem('token', res.token)
+
+                location.href="/index.html"
+            }
+        })
+    })
+
+
 })
