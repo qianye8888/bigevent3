@@ -36,7 +36,7 @@ function renderAvatar(user) {
     $('#welcome').html("欢迎&nbsp;&nbsp;" + name)
 
     if (user.user_pic !== null) {
-        $('.layui-nav-img').show().sttr('src', user.user_pic)
+        $('.layui-nav-img').show().attr('src', user.user_pic)
         $('.text-avatar').hide()
     } else {
         $('.layui-nav-img').hide()
